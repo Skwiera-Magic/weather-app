@@ -3,7 +3,10 @@ import './App.css';
 function App() {
 
   const handleSearch = e => {
-    console.log("yay")
+    let city = document.getElementById("search-input").value.trim()
+    let apiKey = ""
+    let queryURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations="+city+"&aggregateHours=24&unitGroup=us&shortColumnNames=false&contentType=csv&key="+apiKey
+    console.log(queryURL)
     e.preventDefault();
 
   }
