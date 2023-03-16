@@ -10,7 +10,7 @@ function App() {
     let queryURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=" + queryCity + "&limit=8&aggregateHours=24&unitGroup=metric&shortColumnNames=false&contentType=json&key=" + apiKey
     setCity(queryCity)
     let historyButton = city
-    //todo: make sure that cities do not duplicate so we could use it again for buttons
+    //todo: make sure that cities do not duplicate so we could use it again for buttons(line 58)
     setHistory([...history, historyButton])
     e.preventDefault();
     fetch(queryURL)
@@ -55,7 +55,7 @@ function App() {
               <button className='bg-orange-400 rounded border border-black p-1 m-1'>Clear History</button>
               <hr></hr>
               <div className='flex flex-col'>{history.map(city => (
-                // todo: we could put onClick here if cities would not duplicate (mentioned in line 13)
+                // todo: we could put onClick={handleSearch} here if cities would not duplicate (mentioned in line 13)
                 <button className='bg-green-100 rounded border border-black m-1 p-1' key={city}>{city}</button>
               ))}</div>
             </div>
