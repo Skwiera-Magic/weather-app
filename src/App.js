@@ -4,11 +4,17 @@ function App() {
 
   const handleSearch = e => {
     let city = document.getElementById("search-input").value.trim()
-    let apiKey = ""
-    let queryURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations="+city+"&aggregateHours=24&unitGroup=us&shortColumnNames=false&contentType=csv&key="+apiKey
+    let apiKey = "GSXZLQPHWJBFGDLEP2ZW5HKMD"
+    let queryURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations="+city+"&aggregateHours=24&unitGroup=metric&shortColumnNames=false&contentType=json&key="+apiKey
     console.log(queryURL)
     e.preventDefault();
-
+    fetch(queryURL)
+    .then(response => response.json())
+    .then(function renderForecast(weatherResponse) {
+      let queryCity = weatherResponse.locations[city].name;
+      
+      console.log(queryCity);
+      })
   }
   return (
     <div className="App">
