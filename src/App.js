@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import './App.css';
+import Moment from 'react-moment';
 
 function App() {
   const [city, setCity] = useState('')
   const [history, setHistory] = useState([])
   const handleSearch = e => {
+    e.preventDefault();
     let queryCity = document.getElementById("search-input").value.trim()
     let apiKey = "GSXZLQPHWJBFGDLEP2ZW5HKMD"
     let queryURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=" + queryCity + "&limit=8&aggregateHours=24&unitGroup=metric&shortColumnNames=false&contentType=json&key=" + apiKey
-    e.preventDefault();
+    
     fetch(queryURL)
       .then(response => response.json())
       .then(function renderForecast(weatherResponse) {
@@ -20,11 +22,33 @@ function App() {
           setHistory([...history, city])
         console.log(history)
         }
+        
+        
+        let renderToday = document.getElementById("today");
+        let todayDate = new Date();
+        renderToday.innerHTML = "";
+        renderToday.innerHTML = `
+        <div className = border-2 border-orange-300>blaaaaa
+        <h3>${weatherResponse.locations[queryCity].name}, ${todayDate}</h3>
+        <p>Temperature: ${weatherResponse.locations[queryCity].currentConditions.temp} °C</p> 
+        <p>Wind Speed: ${weatherResponse.locations[queryCity].currentConditions.wspd} km/h </p>
+        <p>Humidity: ${weatherResponse.locations[queryCity].currentConditions.humidity} %</p>
+        
+        
+        </div>`;
+
+        
+
+        let renderForecast = document.getElementById("forecast");
+        renderForecast.innerHTML = "";
+        renderForecast.innerHTML = `<div className = border-2 border-orange-300>
+        
+        </div>`;
       })
   }
 
   function clearHistory() {
-    setCity([]);
+    setCity("");
     setHistory([])
   }
 
