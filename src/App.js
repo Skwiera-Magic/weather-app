@@ -8,16 +8,18 @@ function App() {
     let queryCity = document.getElementById("search-input").value.trim()
     let apiKey = "GSXZLQPHWJBFGDLEP2ZW5HKMD"
     let queryURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=" + queryCity + "&limit=8&aggregateHours=24&unitGroup=metric&shortColumnNames=false&contentType=json&key=" + apiKey
-    //todo: make sure that cities do not duplicate so we could use it again for buttons(line 58)
     e.preventDefault();
     fetch(queryURL)
       .then(response => response.json())
       .then(function renderForecast(weatherResponse) {
         console.log(weatherResponse)
-        let queryCityName = weatherResponse.locations[queryCity].address;
-        console.log(queryCityName)
+        let queryCityName = weatherResponse.locations[queryCity].address
         setCity(queryCityName)
-        setHistory([...history, city])
+        console.log(city)
+        if (!history.includes(city)) {
+          setHistory([...history, city])
+        console.log(history)
+        }
       })
   }
 
@@ -62,8 +64,12 @@ function App() {
                 onClick={() => clearHistory()}>Clear History</button>
               <hr></hr>
               <div className='flex flex-col'>{history.map(city => (
-                // todo: we could put onClick={handleSearch} here if cities would not duplicate (mentioned in line 13)
-                <button className='bg-green-100 rounded border border-black m-1 p-1' key={city}>{city}</button>
+                <button 
+                className='bg-green-100 rounded border border-black m-1 p-1' 
+                key={city}
+                onClick={handleSearch}
+                >
+                  {city}</button>
               ))}</div>
             </div>
           </aside>
