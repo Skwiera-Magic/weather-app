@@ -6,7 +6,12 @@ function App() {
   const [history, setHistory] = useState([])
   const handleSearch = e => {
     e.preventDefault();
-    let queryCity = document.getElementById("search-input").value.trim()
+    let queryCity = ''
+    if (e.target.tagName.toLowerCase() === 'button') {
+      queryCity = e.target.textContent.trim();
+    } else {
+      queryCity = document.getElementById("search-input").value.trim()
+    }
     let apiKey = "GSXZLQPHWJBFGDLEP2ZW5HKMD"
     let queryURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=" + queryCity + "&limit=8&aggregateHours=24&unitGroup=metric&shortColumnNames=false&contentType=json&key=" + apiKey
 
@@ -16,7 +21,6 @@ function App() {
         console.log(weatherResponse)
         let queryCityName = weatherResponse.locations[queryCity].address
         setCity(queryCityName)
-        console.log(city)
         if (!history.includes(city)) {
           setHistory([...history, city])
           console.log(history)
@@ -71,7 +75,7 @@ function App() {
                   <div className="input-group-append">
                     <button
                       type="submit"
-                      className="inline-block align-middle text-center select-none border border-black font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-blue-600 text-white hover:bg-blue-600 search-button"
+                      className="inline-block align-middle text-center select-none border border-black font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-blue-600 text-white hover:bg-blue-800 search-button"
                       id="search-button"
                       aria-label="submit search"
                     >
@@ -83,7 +87,7 @@ function App() {
             </form>
             <div className="flex flex-col pl-0 mb-0 border rounded border-gray-300" id="history">
               <button
-                className='bg-orange-400 rounded border border-black p-1 m-1'
+                className='bg-orange-400 hover:bg-orange-600 rounded border border-black p-1 m-1'
                 onClick={() => clearHistory()}>Clear History</button>
               <hr></hr>
               <div className='flex flex-col'>
@@ -93,7 +97,7 @@ function App() {
                   }
                   return (
                     <button
-                      className='bg-green-100 rounded border border-black m-1 p-1'
+                      className='bg-green-300 hover:bg-green-500 rounded border border-black m-1 p-1'
                       key={city}
                       onClick={handleSearch}
                     >
