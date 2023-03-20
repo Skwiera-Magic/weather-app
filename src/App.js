@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-import Moment from 'react-moment';
 
 function App() {
   const [city, setCity] = useState('')
@@ -10,7 +9,7 @@ function App() {
     let queryCity = document.getElementById("search-input").value.trim()
     let apiKey = "GSXZLQPHWJBFGDLEP2ZW5HKMD"
     let queryURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=" + queryCity + "&limit=8&aggregateHours=24&unitGroup=metric&shortColumnNames=false&contentType=json&key=" + apiKey
-    
+
     fetch(queryURL)
       .then(response => response.json())
       .then(function renderForecast(weatherResponse) {
@@ -20,10 +19,10 @@ function App() {
         console.log(city)
         if (!history.includes(city)) {
           setHistory([...history, city])
-        console.log(history)
+          console.log(history)
         }
-        
-        
+
+
         let renderToday = document.getElementById("today");
         let todayDate = new Date();
         renderToday.innerHTML = "";
@@ -37,7 +36,7 @@ function App() {
         
         </div>`;
 
-        
+
 
         let renderForecast = document.getElementById("forecast");
         renderForecast.innerHTML = "";
@@ -87,14 +86,22 @@ function App() {
                 className='bg-orange-400 rounded border border-black p-1 m-1'
                 onClick={() => clearHistory()}>Clear History</button>
               <hr></hr>
-              <div className='flex flex-col'>{history.map(city => (
-                <button 
-                className='bg-green-100 rounded border border-black m-1 p-1' 
-                key={city}
-                onClick={handleSearch}
-                >
-                  {city}</button>
-              ))}</div>
+              <div className='flex flex-col'>
+                {history.map(city => {
+                  if (city.trim() === '') {
+                    return null;
+                  }
+                  return (
+                    <button
+                      className='bg-green-100 rounded border border-black m-1 p-1'
+                      key={city}
+                      onClick={handleSearch}
+                    >
+                      {city}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </aside>
 
