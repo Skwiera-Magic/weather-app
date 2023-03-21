@@ -4,6 +4,12 @@ import './App.css';
 function App() {
   const [city, setCity] = useState('')
   const [history, setHistory] = useState([])
+  let localStorageHistory = JSON.parse(localStorage.history)
+  console.log(localStorageHistory)
+  // console.log(history)
+  // if(localStorageHistory !== null && localStorageHistory !== history) {
+  // setHistory(localStorageHistory)
+  // }
   const handleSearch = e => {
     e.preventDefault();
     let queryCity = ''
@@ -23,6 +29,7 @@ function App() {
         setCity(queryCityName)
         if (!history.includes(city)) {
           setHistory([...history, city])
+          localStorage.setItem('history', JSON.stringify(history))
           console.log(history)
         }
 
