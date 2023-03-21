@@ -3,13 +3,7 @@ import './App.css';
 
 function App() {
   const [city, setCity] = useState('')
-  const [history, setHistory] = useState([])
-  let localStorageHistory = JSON.parse(localStorage.history)
-  console.log(localStorageHistory)
-  // console.log(history)
-  // if(localStorageHistory !== null && localStorageHistory !== history) {
-  // setHistory(localStorageHistory)
-  // }
+  const [history, setHistory] = useState(JSON.parse(localStorage.history))  
   const handleSearch = e => {
     e.preventDefault();
     let queryCity = ''
