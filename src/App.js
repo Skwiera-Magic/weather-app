@@ -46,12 +46,15 @@ function App() {
 
         let renderForecast = document.getElementById("forecast");
         renderForecast.innerHTML = "";
-        renderForecast.innerHTML = `<div className = border-2 border-orange-300>
-        
-        <h3>${weatherResponse.locations[queryCity].name}, ${new Date(weatherResponse.locations[queryCity].values[1].datetimeStr.slice(0,10)).toDateString()}</h3>
-        <p>Temperature: ${weatherResponse.locations[queryCity].values[1].temp} °C</p> 
+        renderForecast.innerHTML = `<div className = "max-w-sm rounded overflow-hidden shadow-lg">
+        <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2"><h3>${weatherResponse.locations[queryCity].name}, ${new Date(weatherResponse.locations[queryCity].values[1].datetimeStr.slice(0,10)).toDateString()}</h3></div>
+        <p className="text-gray-700 text-base">
+        <p clasName="font-bold">Temperature: ${weatherResponse.locations[queryCity].values[1].temp} °C</p> 
         <p>Wind Speed: ${weatherResponse.locations[queryCity].values[1].wspd} km/h </p>
         <p>Humidity: ${weatherResponse.locations[queryCity].values[1].humidity} %</p>
+        </p>
+        </div>
         </div>`;
       })
   }
