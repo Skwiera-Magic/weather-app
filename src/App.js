@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [city, setCity] = useState('')
-  const [history, setHistory] = useState(JSON.parse(localStorage.history))  
+  const [city, setCity] = useState('');
+  const [history, setHistory] = useState(JSON.parse(localStorage.history) || []);
+  //JSON.parse(localStorage.history  
   const handleSearch = e => {
     e.preventDefault();
     let queryCity = ''
@@ -32,21 +33,28 @@ function App() {
         let todayDate = new Date();
         renderToday.innerHTML = "";
         renderToday.innerHTML = `
-        <div className = border-2 border-orange-300>blaaaaa
-        <h3>${weatherResponse.locations[queryCity].name}, ${todayDate}</h3>
+        <div className = border-2 border-orange-300>
+        <h3>${weatherResponse.locations[queryCity].name}, ${todayDate.toDateString()}</h3>
         <p>Temperature: ${weatherResponse.locations[queryCity].currentConditions.temp} °C</p> 
         <p>Wind Speed: ${weatherResponse.locations[queryCity].currentConditions.wspd} km/h </p>
         <p>Humidity: ${weatherResponse.locations[queryCity].currentConditions.humidity} %</p>
         
         
+        
         </div>`;
-
 
 
         let renderForecast = document.getElementById("forecast");
         renderForecast.innerHTML = "";
-        renderForecast.innerHTML = `<div className = border-2 border-orange-300>
-        
+        renderForecast.innerHTML = `<div className = "max-w-sm rounded overflow-hidden shadow-lg">
+        <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2"><h3>${weatherResponse.locations[queryCity].name}, ${new Date(weatherResponse.locations[queryCity].values[1].datetimeStr.slice(0,10)).toDateString()}</h3></div>
+        <p className="text-gray-700 text-base">
+        <p clasName="font-bold">Temperature: ${weatherResponse.locations[queryCity].values[1].temp} °C</p> 
+        <p>Wind Speed: ${weatherResponse.locations[queryCity].values[1].wspd} km/h </p>
+        <p>Humidity: ${weatherResponse.locations[queryCity].values[1].humidity} %</p>
+        </p>
+        </div>
         </div>`;
       })
   }
