@@ -1,67 +1,92 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [city, setCity] = useState('');
-  const [history, setHistory] = useState(JSON.parse(localStorage.history) || []);
-  //JSON.parse(localStorage.history  
-  const handleSearch = e => {
+  const [city, setCity] = useState("");
+  const [history, setHistory] = useState(
+    JSON.parse(localStorage.history) || []
+  );
+  //JSON.parse(localStorage.history
+  const handleSearch = (e) => {
     e.preventDefault();
-    let queryCity = ''
-    if (e.target.tagName.toLowerCase() === 'button') {
+    let queryCity = "";
+    if (e.target.tagName.toLowerCase() === "button") {
       queryCity = e.target.textContent.trim();
     } else {
-      queryCity = document.getElementById("search-input").value.trim()
+      queryCity = document.getElementById("search-input").value.trim();
     }
-    let apiKey = "GSXZLQPHWJBFGDLEP2ZW5HKMD"
-    let queryURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=" + queryCity + "&limit=8&aggregateHours=24&unitGroup=metric&shortColumnNames=false&contentType=json&key=" + apiKey
+    let apiKey = "GSXZLQPHWJBFGDLEP2ZW5HKMD";
+    let queryURL =
+      "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?locations=" +
+      queryCity +
+      "&limit=8&aggregateHours=24&unitGroup=metric&shortColumnNames=false&contentType=json&key=" +
+      apiKey;
 
     fetch(queryURL)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then(function renderForecast(weatherResponse) {
-        console.log(weatherResponse)
-        let queryCityName = weatherResponse.locations[queryCity].address
-        setCity(queryCityName)
+        console.log(weatherResponse);
+        let queryCityName = weatherResponse.locations[queryCity].address;
+        setCity(queryCityName);
         if (!history.includes(city)) {
-          setHistory([...history, city])
-          localStorage.setItem('history', JSON.stringify(history))
-          console.log(history)
+          setHistory([...history, city]);
+          localStorage.setItem("history", JSON.stringify(history));
+          console.log(history);
         }
-
 
         let renderToday = document.getElementById("today");
         let todayDate = new Date();
         renderToday.innerHTML = "";
         renderToday.innerHTML = `
         <div className = border-2 border-orange-300>
-        <h3>${weatherResponse.locations[queryCity].name}, ${todayDate.toDateString()}</h3>
-        <p>Temperature: ${weatherResponse.locations[queryCity].currentConditions.temp} °C</p> 
-        <p>Wind Speed: ${weatherResponse.locations[queryCity].currentConditions.wspd} km/h </p>
-        <p>Humidity: ${weatherResponse.locations[queryCity].currentConditions.humidity} %</p>
+        <h3>${
+          weatherResponse.locations[queryCity].name
+        }, ${todayDate.toDateString()}</h3>
+        <p>Temperature: ${
+          weatherResponse.locations[queryCity].currentConditions.temp
+        } °C</p> 
+        <p>Wind Speed: ${
+          weatherResponse.locations[queryCity].currentConditions.wspd
+        } km/h </p>
+        <p>Humidity: ${
+          weatherResponse.locations[queryCity].currentConditions.humidity
+        } %</p>
         
         
         
         </div>`;
-
 
         let renderForecast = document.getElementById("forecast");
         renderForecast.innerHTML = "";
         renderForecast.innerHTML = `<div className = "max-w-sm rounded overflow-hidden shadow-lg">
         <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2"><h3>${weatherResponse.locations[queryCity].name}, ${new Date(weatherResponse.locations[queryCity].values[1].datetimeStr.slice(0,10)).toDateString()}</h3></div>
+        <div className="font-bold text-xl mb-2"><h3>${
+          weatherResponse.locations[queryCity].name
+        }, ${new Date(
+          weatherResponse.locations[queryCity].values[1].datetimeStr.slice(
+            0,
+            10
+          )
+        ).toDateString()}</h3></div>
         <p className="text-gray-700 text-base">
-        <p clasName="font-bold">Temperature: ${weatherResponse.locations[queryCity].values[1].temp} °C</p> 
-        <p>Wind Speed: ${weatherResponse.locations[queryCity].values[1].wspd} km/h </p>
-        <p>Humidity: ${weatherResponse.locations[queryCity].values[1].humidity} %</p>
+        <p clasName="font-bold">Temperature: ${
+          weatherResponse.locations[queryCity].values[1].temp
+        } °C</p> 
+        <p>Wind Speed: ${
+          weatherResponse.locations[queryCity].values[1].wspd
+        } km/h </p>
+        <p>Humidity: ${
+          weatherResponse.locations[queryCity].values[1].humidity
+        } %</p>
         </p>
         </div>
         </div>`;
-      })
-  }
+      });
+  };
 
   function clearHistory() {
     setCity("");
-    setHistory([])
+    setHistory([]);
   }
 
   return (
@@ -79,8 +104,14 @@ function App() {
             <form id="search-form" className="form" onSubmit={handleSearch}>
               <div className="flex items-center mb-4">
                 <div className="relative flex items-stretch w-full">
-                  <input className="form-input weather-search p-1" type="text" id="search-input" placeholder="Liverpool"
-                    aria-labelledby="form-heading" aria-controls="today forecast" />
+                  <input
+                    className="form-input weather-search p-1"
+                    type="text"
+                    id="search-input"
+                    placeholder="Liverpool"
+                    aria-labelledby="form-heading"
+                    aria-controls="today forecast"
+                  />
                   <div className="input-group-append">
                     <button
                       type="submit"
@@ -94,19 +125,25 @@ function App() {
                 </div>
               </div>
             </form>
-            <div className="flex flex-col pl-0 mb-0 border rounded border-gray-300" id="history">
+            <div
+              className="flex flex-col pl-0 mb-0 border rounded border-gray-300"
+              id="history"
+            >
               <button
-                className='bg-orange-400 hover:bg-orange-600 rounded border border-black p-1 m-1'
-                onClick={() => clearHistory()}>Clear History</button>
+                className="bg-orange-400 hover:bg-orange-600 rounded border border-black p-1 m-1"
+                onClick={() => clearHistory()}
+              >
+                Clear History
+              </button>
               <hr></hr>
-              <div className='flex flex-col'>
-                {history.map(city => {
-                  if (city.trim() === '') {
+              <div className="flex flex-col">
+                {history.map((city) => {
+                  if (city.trim() === "") {
                     return null;
                   }
                   return (
                     <button
-                      className='bg-green-300 hover:bg-green-500 rounded border border-black m-1 p-1'
+                      className="bg-green-300 hover:bg-green-500 rounded border border-black m-1 p-1"
                       key={city}
                       onClick={handleSearch}
                     >
@@ -119,8 +156,16 @@ function App() {
           </aside>
 
           <div className="lg:w-3/4 pr-4 pl-4 pb-3">
-            <section id="today" className="mt-3 bg-red-500" aria-live="polite">today</section>
-            <section id="forecast" className="flex flex-wrap bg-blue-500 mt-3" aria-live="polite">forecast</section>
+            <section id="today" className="mt-3 bg-red-500" aria-live="polite">
+              today
+            </section>
+            <section
+              id="forecast"
+              className="flex flex-wrap bg-blue-500 mt-3"
+              aria-live="polite"
+            >
+              forecast
+            </section>
           </div>
         </div>
       </div>
