@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import History from './components/history';
 
 function App() {
   const [city, setCity] = useState('');
-  const [history, setHistory] = useState(JSON.parse(localStorage.history) || []);
-  //JSON.parse(localStorage.history  
+  const [history, setHistory] = useState([]);
+
+  useEffect(()=>{
+     if (localStorage.length === 0 ){
+    localStorage.setItem('testHistory', JSON.stringify(['London']) )
+    setHistory(JSON.parse(localStorage.getItem('testHistory')))
+    // console.log(history)
+  } else {
+    setHistory(JSON.parse(localStorage.getItem('testHistory')))
+
+  }
+  },[])
+ 
+  // localStorage.setItem('testHistory', history)
   const handleSearch = e => {
     e.preventDefault();
     let queryCity = ''
@@ -22,9 +35,11 @@ function App() {
         console.log(weatherResponse)
         let queryCityName = weatherResponse.locations[queryCity].address
         setCity(queryCityName)
-        if (!history.includes(city)) {
-          setHistory([...history, city])
-          localStorage.setItem('history', JSON.stringify(history))
+        if (!history.includes(city) || !history.includes(queryCityName)) {
+          // console.log([...history, queryCityName])
+          localStorage.setItem('testHistory', JSON.stringify([...history, queryCityName]))
+          setHistory([...history, queryCityName])
+          console.log("localstorage after adding city", localStorage.getItem('testHistory'))
           console.log(history)
         }
 
@@ -33,7 +48,7 @@ function App() {
         let todayDate = new Date();
         renderToday.innerHTML = "";
         renderToday.innerHTML = `
-        <div className = border-2 border-orange-300>
+        <div className="border-2 border-orange-300">
         <h3>${weatherResponse.locations[queryCity].name}, ${todayDate.toDateString()}</h3>
         <p>Temperature: ${weatherResponse.locations[queryCity].currentConditions.temp} °C</p> 
         <p>Wind Speed: ${weatherResponse.locations[queryCity].currentConditions.wspd} km/h </p>
@@ -46,7 +61,7 @@ function App() {
 
         let renderForecast = document.getElementById("forecast");
         renderForecast.innerHTML = "";
-        renderForecast.innerHTML = `<div className = "max-w-sm rounded overflow-hidden shadow-lg">
+        renderForecast.innerHTML = `<div className="max-w-sm rounded overflow-hidden shadow-lg">
         <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2"><h3>${weatherResponse.locations[queryCity].name}, ${new Date(weatherResponse.locations[queryCity].values[1].datetimeStr.slice(0,10)).toDateString()}</h3></div>
         <p className="text-gray-700 text-base">
@@ -62,6 +77,7 @@ function App() {
   function clearHistory() {
     setCity("");
     setHistory([])
+    localStorage.setItem('history', [])
   }
 
   return (
@@ -101,6 +117,7 @@ function App() {
               <hr></hr>
               <div className='flex flex-col'>
                 {history.map(city => {
+                  console.log(city)
                   if (city.trim() === '') {
                     return null;
                   }
