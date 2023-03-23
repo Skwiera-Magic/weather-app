@@ -150,7 +150,7 @@ function App() {
           </aside>
 
           <div className="lg:w-3/4 pr-4 pl-4 pb-3">
-            <section id="today" className="mt-3 bg-red-500" aria-live="polite">
+            <section id="today" className="mt-3" aria-live="polite">
             <TodayCard weatherResponse={weatherResponse} city={city} ></TodayCard></section>
             <section id="forecast" className="flex flex-wrap bg-blue-500 mt-3" aria-live="polite"></section>
             <Card weatherResponse={weatherResponse} city={city} ></Card>
