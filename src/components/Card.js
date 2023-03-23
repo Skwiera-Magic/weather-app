@@ -2,9 +2,13 @@ function Card(props) {
    
     console.log(props.weatherResponse)
     console.log(props.city)
+    // console.log(props.index)
     // ifprops.weatherResponses)
     // 
     // return null;
+
+
+    
     return (
         <div className = "max-w-sm rounded overflow-hidden shadow-lg">
         <div className="px-6 py-4">
@@ -14,6 +18,7 @@ function Card(props) {
         <p>Wind Speed: {props.weatherResponse.locations[props.city].values[1].wspd} km/h </p>
         <p>Humidity: {props.weatherResponse.locations[props.city].values[1].humidity} %</p>
         </p>
+        
         </div>
         </div>
 
