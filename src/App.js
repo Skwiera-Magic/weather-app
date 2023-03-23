@@ -35,7 +35,7 @@ function App() {
       .then(function renderForecast(weatherResponse) {
         console.log(weatherResponse)
         setWeatherResponse(weatherResponse);
-        let queryCityName = weatherResponse.locations[queryCity].name
+      //  let queryCityName = weatherResponse.locations[queryCity].name
         setCity(queryCity)
         // setCityName(queryCityName)
         if (!history.includes(city)) {
@@ -44,33 +44,33 @@ function App() {
           console.log(history);
         }
 
-        let renderToday = document.getElementById("today");
-        let todayDate = new Date();
-        renderToday.innerHTML = "";
-        renderToday.innerHTML = `
-        <div className = border-2 border-orange-300>
-        <h3>${weatherResponse.locations[queryCity].name}, ${todayDate.toDateString()}</h3>
-        <p>Temperature: ${weatherResponse.locations[queryCity].currentConditions.temp} °C</p> 
-        <p>Wind Speed: ${weatherResponse.locations[queryCity].currentConditions.wspd} km/h </p>
-        <p>Humidity: ${weatherResponse.locations[queryCity].currentConditions.humidity} %</p>
+        // let renderToday = document.getElementById("today");
+        // let todayDate = new Date();
+        // renderToday.innerHTML = "";
+        // renderToday.innerHTML = `
+        // <div className = border-2 border-orange-300>
+        // <h3>${weatherResponse.locations[queryCity].name}, ${todayDate.toDateString()}</h3>
+        // <p>Temperature: ${weatherResponse.locations[queryCity].currentConditions.temp} °C</p> 
+        // <p>Wind Speed: ${weatherResponse.locations[queryCity].currentConditions.wspd} km/h </p>
+        // <p>Humidity: ${weatherResponse.locations[queryCity].currentConditions.humidity} %</p>
         
         
         
-        </div>`;
+        // </div>`;
 
 
-        let renderForecast = document.getElementById("forecast");
-        renderForecast.innerHTML = "";
-        renderForecast.innerHTML = `<div className = "max-w-sm rounded overflow-hidden shadow-lg">
-        <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2"><h3>${weatherResponse.locations[queryCity].name}, ${new Date(weatherResponse.locations[queryCity].values[1].datetimeStr.slice(0,10)).toDateString()}</h3></div>
-        <p className="text-gray-700 text-base">
-        <p clasName="font-bold">Temperature: ${weatherResponse.locations[queryCity].values[1].temp} °C</p> 
-        <p>Wind Speed: ${weatherResponse.locations[queryCity].values[1].wspd} km/h </p>
-        <p>Humidity: ${weatherResponse.locations[queryCity].values[1].humidity} %</p>
-        </p>
-        </div>
-        </div>`;
+        // let renderForecast = document.getElementById("forecast");
+        // renderForecast.innerHTML = "";
+        // renderForecast.innerHTML = `<div className = "max-w-sm rounded overflow-hidden shadow-lg">
+        // <div className="px-6 py-4">
+        // <div className="font-bold text-xl mb-2"><h3>${weatherResponse.locations[queryCity].name}, ${new Date(weatherResponse.locations[queryCity].values[1].datetimeStr.slice(0,10)).toDateString()}</h3></div>
+        // <p className="text-gray-700 text-base">
+        // <p clasName="font-bold">Temperature: ${weatherResponse.locations[queryCity].values[1].temp} °C</p> 
+        // <p>Wind Speed: ${weatherResponse.locations[queryCity].values[1].wspd} km/h </p>
+        // <p>Humidity: ${weatherResponse.locations[queryCity].values[1].humidity} %</p>
+        // </p>
+        // </div>
+        // </div>`;
       })
   }
 
