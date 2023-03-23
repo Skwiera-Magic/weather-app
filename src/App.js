@@ -104,7 +104,7 @@ function App() {
                 </button>
                 <hr></hr>
                 <div className="flex flex-col">
-                  <History history={history} handleSearch={handleSearch}/>
+                  {city!=='test' && <History history={history} handleSearch={handleSearch}/>}
                 </div>
               </div>
             </aside>
@@ -113,14 +113,14 @@ function App() {
             <section id="today" className="mt-3" aria-live="polite">
             
             {
-            city!=='test'&&<TodayCard weatherResponse={weatherResponse} city={city} ></TodayCard>
+            city!=='test' && <TodayCard weatherResponse={weatherResponse} city={city} ></TodayCard>
             }
             </section>
             <section id="forecast" className="flex flex-wrap mt-3" aria-live="polite">
             
             {
               
-            city!=='test'&&<List weatherResponse={weatherResponse} city={city}></List>
+            city!=='test' && <List weatherResponse={weatherResponse} city={city}></List>
             }
             </section>
             </div>
