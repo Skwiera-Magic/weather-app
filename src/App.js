@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import "./components/Card";
+import  "./images/bg1.jpg";
 
 function App() {
   const [city, setCity] = useState('test');
@@ -75,16 +76,18 @@ function App() {
   }
 
   return (
+     <div className=' bg-cover bg-center  bg-bg2' >
     <div className="App">
-      <header className="container max-w-full mx-auto sm:px-4 text-center text-white h-14 bg-gradient-to-r from-sky-500 to-indigo-500 p-2 weather-header">
-        <h1>Weather Dashboard</h1>
+     
+      <header className="container max-w-full mx-auto sm:px-4 text-center text-white text-3xl font-bold h-20 bg-gradient-to-r from-sky-500 to-indigo-500 p-2 weather-header ">
+        <h1 className='mt-2'>Weather Dashboard</h1>
       </header>
 
       <div className="container max-w-full mx-auto sm:px-4">
         <div className="flex flex-wrap ">
           <aside className="lg:w-1/4 pr-4 pl-4 pb-3">
-            <h2 id="form-heading" className="mt-1 h3 form-label">
-              Search for a City:
+            <h2 id="form-heading" className="mt-1 mb-2 mr-0 pt-2 h3 form-label border-solid border-2 border-sky-500 ...  rounded-lg ... h-14 bg-gradient-to-r from-sky-500 to-indigo-500 text-white">
+              Search for a City :
             </h2>
             <form id="search-form" className="form" onSubmit={handleSearch}>
               <div className="flex items-center mb-4">
@@ -141,10 +144,11 @@ function App() {
           </aside>
 
           <div className="lg:w-3/4 pr-4 pl-4 pb-3">
-            <section id="today" className="mt-3 bg-red-500" aria-live="polite">today</section>
+            <section id="today" className="mt-4 drop-shadow-md hover:drop-shadow-xl bg-gradient-to-r from-purple-500 to-pink-500" aria-live="polite">today</section>
             <section id="forecast" className="flex flex-wrap bg-blue-500 mt-3" aria-live="polite">forecast</section>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
