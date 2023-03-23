@@ -75,8 +75,9 @@ function App() {
   }
 
   function clearHistory() {
-    setCity("test");
-    setHistory([])
+    setCity("");
+    setHistory([]);
+    localStorage.setItem('history', []);
   }
 
   return (
@@ -130,7 +131,8 @@ function App() {
               <hr></hr>
               <div className="flex flex-col">
                 {history.map((city) => {
-                  if (city.trim() === "") {
+                  console.log(city)
+                  if (city.trim() === '') {
                     return null;
                   }
                   return (
