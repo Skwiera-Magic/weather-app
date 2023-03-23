@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Card from "./components/Card";
+import "./components/Card";
 
 function App() {
   const [city, setCity] = useState('test');
@@ -76,7 +76,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="container max-w-full mx-auto sm:px-4 text-center text-white bg-gray-900 p-2 weather-header">
+      <header className="container max-w-full mx-auto sm:px-4 text-center text-white h-14 bg-gradient-to-r from-sky-500 to-indigo-500 p-2 weather-header">
         <h1>Weather Dashboard</h1>
       </header>
 
