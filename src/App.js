@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import "./components/Card";
 import "./images/bg1.jpg";
-import Card from "./components/Card";
 import TodayCard from "./components/TodayCard";
 import History from './components/history';
+import List from "./components/List"
 
 function App() {
   const [city, setCity] = useState('test');
@@ -49,9 +49,9 @@ function App() {
   }
 
   function clearHistory() {
-    setCity("");
+    // setCity("test");
     setHistory([]);
-    localStorage.setItem('history', []);
+    localStorage.setItem('history', JSON.stringify([]));
   }
 
   return (
@@ -109,13 +109,20 @@ function App() {
               </div>
             </aside>
 
-            <div className="lg:w-3/4 pr-4 pl-4 pb-3">
-              <section id="today" className="mt-3" aria-live="polite">
-                <TodayCard weatherResponse={weatherResponse} city={city} ></TodayCard></section>
-              <section id="forecast" className="flex flex-wrap bg-blue-500 mt-3" aria-live="polite"></section>
-              <Card weatherResponse={weatherResponse} city={city} ></Card>
-              {/* <Card weatherResponse={weatherResponse} city={city} index={2}></Card>
-            <Card weatherResponse={weatherResponse} city={city} index={3}></Card> */}
+          <div className="lg:w-3/4 pr-4 pl-4 pb-3">
+            <section id="today" className="mt-3" aria-live="polite">
+            
+            {
+            city!=='test'&&<TodayCard weatherResponse={weatherResponse} city={city} ></TodayCard>
+            }
+            </section>
+            <section id="forecast" className="flex flex-wrap mt-3" aria-live="polite">
+            
+            {
+              
+            city!=='test'&&<List weatherResponse={weatherResponse} city={city}></List>
+            }
+            </section>
             </div>
           </div>
         </div>
