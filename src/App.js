@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Card from "./components/Card";
-
+import TodayCard from "./components/TodayCard";
 function App() {
   const [city, setCity] = useState('test');
   const [history, setHistory] = useState([]);
   const [weatherResponse, setWeatherResponse] = useState({locations:{test:{name: "", values:[{}, {datetimeStr:'2023-03-22T00:00:00-06:00', temp:"", wspd:"", humidity:""}]}}});
- 
+  // const [cityName, setCityName] = useState('test')
   // //JSON.parse(localStorage.history  
   useEffect(() => {
     let savedHistory = JSON.parse(localStorage.getItem("history")) || [];
@@ -29,7 +29,8 @@ function App() {
         console.log(weatherResponse)
         setWeatherResponse(weatherResponse);
         let queryCityName = weatherResponse.locations[queryCity].name
-        setCity(queryCityName)
+        setCity(queryCity)
+        // setCityName(queryCityName)
         if (!history.includes(city)) {
           setHistory([...history, city])
           localStorage.setItem('history', JSON.stringify(history))
@@ -69,7 +70,7 @@ function App() {
   }
 
   function clearHistory() {
-    setCity("");
+    setCity("test");
     setHistory([])
   }
 
@@ -128,9 +129,12 @@ function App() {
           </aside>
 
           <div className="lg:w-3/4 pr-4 pl-4 pb-3">
-            <section id="today" className="mt-3 bg-red-500" aria-live="polite">today</section>
-            <section id="forecast" className="flex flex-wrap bg-blue-500 mt-3" aria-live="polite">forecast</section>
-            <Card weatherResponse={weatherResponse} city={city}></Card>
+            <section id="today" className="mt-3 bg-red-500" aria-live="polite">
+            <TodayCard weatherResponse={weatherResponse} city={city} ></TodayCard></section>
+            <section id="forecast" className="flex flex-wrap bg-blue-500 mt-3" aria-live="polite"></section>
+            <Card weatherResponse={weatherResponse} city={city} ></Card>
+            {/* <Card weatherResponse={weatherResponse} city={city} index={2}></Card>
+            <Card weatherResponse={weatherResponse} city={city} index={3}></Card> */}
           </div>
         </div>
       </div>
