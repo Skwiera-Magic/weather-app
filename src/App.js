@@ -1,13 +1,18 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import Card from "./components/Card";
 
 function App() {
-  const [city, setCity] = useState("");
-  const [history, setHistory] = useState(
-    JSON.parse(localStorage.history) || []
-  );
-  //JSON.parse(localStorage.history
-  const handleSearch = (e) => {
+  const [city, setCity] = useState('test');
+  const [history, setHistory] = useState([]);
+  const [weatherResponse, setWeatherResponse] = useState({locations:{test:{name: "", values:[{}, {datetimeStr:'2023-03-22T00:00:00-06:00', temp:"", wspd:"", humidity:""}]}}});
+ 
+  // //JSON.parse(localStorage.history  
+  useEffect(() => {
+    let savedHistory = JSON.parse(localStorage.getItem("history")) || [];
+    setHistory(savedHistory);
+  }, [])
+  const handleSearch = e => {
     e.preventDefault();
     let queryCity = "";
     if (e.target.tagName.toLowerCase() === "button") {
@@ -25,9 +30,9 @@ function App() {
     fetch(queryURL)
       .then((response) => response.json())
       .then(function renderForecast(weatherResponse) {
-        console.log(weatherResponse);
-        let queryCityName = weatherResponse.locations[queryCity].address;
-        setCity(queryCityName);
+        console.log(weatherResponse)
+        let queryCityName = weatherResponse.locations[queryCity].address
+        setCity(queryCityName)
         if (!history.includes(city)) {
           setHistory([...history, city]);
           localStorage.setItem("history", JSON.stringify(history));
@@ -39,50 +44,30 @@ function App() {
         renderToday.innerHTML = "";
         renderToday.innerHTML = `
         <div className = border-2 border-orange-300>
-        <h3>${
-          weatherResponse.locations[queryCity].name
-        }, ${todayDate.toDateString()}</h3>
-        <p>Temperature: ${
-          weatherResponse.locations[queryCity].currentConditions.temp
-        } °C</p> 
-        <p>Wind Speed: ${
-          weatherResponse.locations[queryCity].currentConditions.wspd
-        } km/h </p>
-        <p>Humidity: ${
-          weatherResponse.locations[queryCity].currentConditions.humidity
-        } %</p>
+        <h3>${weatherResponse.locations[queryCity].name}, ${todayDate.toDateString()}</h3>
+        <p>Temperature: ${weatherResponse.locations[queryCity].currentConditions.temp} °C</p> 
+        <p>Wind Speed: ${weatherResponse.locations[queryCity].currentConditions.wspd} km/h </p>
+        <p>Humidity: ${weatherResponse.locations[queryCity].currentConditions.humidity} %</p>
         
         
         
         </div>`;
 
+
         let renderForecast = document.getElementById("forecast");
         renderForecast.innerHTML = "";
         renderForecast.innerHTML = `<div className = "max-w-sm rounded overflow-hidden shadow-lg">
         <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2"><h3>${
-          weatherResponse.locations[queryCity].name
-        }, ${new Date(
-          weatherResponse.locations[queryCity].values[1].datetimeStr.slice(
-            0,
-            10
-          )
-        ).toDateString()}</h3></div>
+        <div className="font-bold text-xl mb-2"><h3>${weatherResponse.locations[queryCity].name}, ${new Date(weatherResponse.locations[queryCity].values[1].datetimeStr.slice(0,10)).toDateString()}</h3></div>
         <p className="text-gray-700 text-base">
-        <p clasName="font-bold">Temperature: ${
-          weatherResponse.locations[queryCity].values[1].temp
-        } °C</p> 
-        <p>Wind Speed: ${
-          weatherResponse.locations[queryCity].values[1].wspd
-        } km/h </p>
-        <p>Humidity: ${
-          weatherResponse.locations[queryCity].values[1].humidity
-        } %</p>
+        <p clasName="font-bold">Temperature: ${weatherResponse.locations[queryCity].values[1].temp} °C</p> 
+        <p>Wind Speed: ${weatherResponse.locations[queryCity].values[1].wspd} km/h </p>
+        <p>Humidity: ${weatherResponse.locations[queryCity].values[1].humidity} %</p>
         </p>
         </div>
         </div>`;
-      });
-  };
+      })
+  }
 
   function clearHistory() {
     setCity("");
@@ -156,16 +141,8 @@ function App() {
           </aside>
 
           <div className="lg:w-3/4 pr-4 pl-4 pb-3">
-            <section id="today" className="mt-3 bg-red-500" aria-live="polite">
-              today
-            </section>
-            <section
-              id="forecast"
-              className="flex flex-wrap bg-blue-500 mt-3"
-              aria-live="polite"
-            >
-              forecast
-            </section>
+            <section id="today" className="mt-3 bg-red-500" aria-live="polite">today</section>
+            <section id="forecast" className="flex flex-wrap bg-blue-500 mt-3" aria-live="polite">forecast</section>
           </div>
         </div>
       </div>
