@@ -10,12 +10,12 @@ function App() {
   const [city, setCity] = useState('test');
   const [history, setHistory] = useState([]);
   const [weatherResponse, setWeatherResponse] = useState({ locations: { test: { name: "", values: [{}, { datetimeStr: '2023-03-22T00:00:00-06:00', temp: "", wspd: "", humidity: "" }] } } });
-  const [cityName, setCityName] = useState('test')
+  const [cityName, setCityName] = useState('')
 
   useEffect(() => {
     let savedHistory = JSON.parse(localStorage.getItem("history")) || [];
     setHistory(savedHistory);
-  }, [])
+  }, []);
 
   const handleSearch = e => {
     e.preventDefault();
@@ -40,16 +40,14 @@ function App() {
         let queryCityName = weatherResponse.locations[queryCity].address
         setCity(queryCity)
         setCityName(queryCityName)
-        if (!history.includes(cityName) || !city === 'test') {
+        if (!history.includes(cityName)) {
           setHistory([...history, cityName]);
-          localStorage.setItem("history", JSON.stringify(history));
-          console.log(history);
+          localStorage.setItem("history", JSON.stringify([...history, cityName]));
         }
       })
   }
 
   function clearHistory() {
-    // setCity("test");
     setHistory([]);
     localStorage.setItem('history', JSON.stringify([]));
   }
@@ -104,7 +102,7 @@ function App() {
                 </button>
                 <hr></hr>
                 <div className="flex flex-col">
-                  {city!=='test' && <History history={history} handleSearch={handleSearch}/>}
+                  <History history={history} handleSearch={handleSearch}/>
                 </div>
               </div>
             </aside>
