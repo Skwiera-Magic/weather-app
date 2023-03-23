@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 
-function History () {
+function History (props) {
     return (
         <div className='flex flex-col'>
-                {history.map(city => {
+                {props.history.map(city => {
                   if (city.trim() === '') {
                     return null;
                   }
@@ -11,7 +11,7 @@ function History () {
                     <button
                       className='bg-green-300 hover:bg-green-500 rounded border border-black m-1 p-1'
                       key={city}
-                      onClick={handleSearch}
+                      onClick={props.handleSearch}
                     >
                       {city}
                     </button>
