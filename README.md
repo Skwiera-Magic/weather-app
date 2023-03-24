@@ -8,7 +8,7 @@ The Weather forecasting app has been designed to deliver the forecast for today 
 
 In order to comply with the rules, the project had to be completed using at least 2 tools that had not been previously utilised in this BootCamp.
 
-The tools chosen were Tailwindcss written over React and utilising the Visual Crossing Weather Appi. 
+The tools chosen were Tailwindcss written over React and utilising the Visual Crossing Weather Appi. The storage used is local storage and Fetch played a good part. 
 
 The journey has been very interesting as Tailwindcss is a new and exciting tool that appears to be very self willed on occasions causing a great deal of head scratching. A steep learning curve for all of us.
 
@@ -25,9 +25,9 @@ You can find deployed project here: https://weather-dashboard-react.netlify.app/
 
 ## How the app renders on a tablet.
 
-![Pixel5Bg2.png](../weather-app/src/components/images/Pixel5Bg2.png)
 
+<img src="<img src = "../weather-app/src/components/images/Pixel5Bg2.png" width="200">
 
 ## How the app renders on a mobile.
 
-![PixelWithBg1.png](../weather-app/src/images/PixelWithBg1.png)
+<img src="<img src = "../weather-app/src/components/images/PixelWithBg1.png" width="200">
