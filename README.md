@@ -26,8 +26,8 @@ You can find deployed project here: https://weather-dashboard-react.netlify.app/
 ## How the app renders on a tablet.
 
 
-<img src="../weather-app/src/components/images/Pixel5Bg2.png" width="200">
+![Screenshot of the weather dashboard rendered on tablet](./src/images/Pixel5Bg2.png)
 
 ## How the app renders on a mobile.
 
-<img src="../weather-app/src/components/images/PixelWithBg1.png" width="200">
+![Screenshot of the weather dashboard rendered on mobile](./src/images/PixelWithBg1.png)
