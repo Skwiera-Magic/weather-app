@@ -18,6 +18,8 @@ Surely regular use and practice will prove that is is very useful tool.
 
 The result of our efforts is an app that, while requiring some more work to make it perfect, is a useful and attractive application.
 
+You can find deployed project here: https://weather-dashboard-react.netlify.app/
+
 
 # Screen Shots
 
