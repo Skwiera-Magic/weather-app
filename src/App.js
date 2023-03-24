@@ -35,7 +35,6 @@ function App() {
     fetch(queryURL)
       .then((response) => response.json())
       .then(function renderForecast(weatherResponse) {
-        console.log(weatherResponse)
         setWeatherResponse(weatherResponse);
         let queryCityName = weatherResponse.locations[queryCity].address
         setCity(queryCity)
@@ -53,8 +52,7 @@ function App() {
   }
 
   return (
-    <div className='bg-cover bg-center h-screen  bg-bg2' >
-      <div className="App">
+      <div className="App bg-cover bg-scroll h-screen bg-bg2">
 
         <header className="container max-w-full mx-auto sm:px-4 text-center text-white text-3xl font-bold h-20 bg-gradient-to-r from-sky-500 to-indigo-500 p-2 weather-header ">
           <h1 className='mt-2'>Weather Dashboard</h1>
@@ -102,30 +100,22 @@ function App() {
                 </button>
                 <hr></hr>
                 <div className="flex flex-col">
-                  <History history={history} handleSearch={handleSearch}/>
+                  <History history={history} handleSearch={handleSearch} />
                 </div>
               </div>
             </aside>
 
-          <div className="lg:w-3/4 pr-4 pl-4 pb-3">
-            <section id="today" className="mt-3" aria-live="polite">
-            
-            {
-            city!=='test' && <TodayCard weatherResponse={weatherResponse} city={city} ></TodayCard>
-            }
-            </section>
-            <section id="forecast" className="flex flex-wrap mt-3" aria-live="polite">
-            
-            {
-              
-            city!=='test' && <List weatherResponse={weatherResponse} city={city}></List>
-            }
-            </section>
+            <div className="lg:w-3/4 pr-4 pl-4 pb-3">
+              <section id="today" className="mt-3 flex justify-center" aria-live="polite">
+                {city !== 'test' && <TodayCard weatherResponse={weatherResponse} city={city} ></TodayCard>}
+              </section>
+              <section id="forecast" className="flex flex-wrap mt-3 justify-center" aria-live="polite">
+                {city !== 'test' && <List weatherResponse={weatherResponse} city={city}></List>}
+              </section>
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
