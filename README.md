@@ -14,7 +14,18 @@ The journey has been very interesting as Tailwindcss is a new and exciting tool 
 
 Surely regular use and practice will prove that is is very useful tool.
 
+# Result
+
+The result of our efforts is an app that, while requiring some more work to make it perfect, is a useful and attractive application.
+
 
 # Screen Shots
 
+## How the app renders on a tablet.
+
 ![Pixel5Bg2.png](../weather-app/src/components/images/Pixel5Bg2.png)
+
+
+## How the app renders on a mobile.
+
+![PixelWithBg1.png](../weather-app/src/images/PixelWithBg1.png)
