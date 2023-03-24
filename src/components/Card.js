@@ -8,7 +8,7 @@ function Card(props) {
 
   return (
     // Flex code
-    <div className="flex flex-col shadow-md w-fullm-6 overflow-hidden sm:w-5">
+    <div className="flex flex-row shadow-md w-fullm-6 overflow-hidden sm:w-5">
       <div className="max-w-sm rounded overflow-hidden shadow-lg bg-gray-400">
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">
