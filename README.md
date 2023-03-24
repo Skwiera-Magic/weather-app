@@ -13,3 +13,8 @@ The tools chosen were Tailwindcss written over React and utilising the Visual Cr
 The journey has been very interesting as Tailwindcss is a new and exciting tool that appears to be very self willed on occasions causing a great deal of head scratching. A steep learning curve for all of us.
 
 Surely regular use and practice will prove that is is very useful tool.
+
+
+# Screen Shots
+
+![Pixel5Bg2.png](../weather-app/src/components/images/Pixel5Bg2.png)
