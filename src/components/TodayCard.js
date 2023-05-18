@@ -2,7 +2,7 @@ function TodayCard(props) {
     let todayDate = new Date();
 
     return (
-        <div className="w-96 rounded overflow-hidden shadow-lg bg-gray-200">
+        <div className="w-64 rounded overflow-hidden shadow-lg bg-gray-200">
             <div className="font-bold text-xl mb-2">
                 <h3>{props.weatherResponse.locations[props.city].address}</h3>
                 <h4>{todayDate.toDateString()}</h4>
